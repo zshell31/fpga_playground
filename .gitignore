@@ -1,0 +1,6 @@
+.direnv/
+*.bit
+*.json
+*_out.config
+*_tb.out
+*_tb.vcd
