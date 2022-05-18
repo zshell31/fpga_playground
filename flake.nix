@@ -60,13 +60,24 @@
         trellis
         gtkwave
       ];
+
+      pythonPackages = with pkgs.python3Packages; [
+          python
+          venvShellHook
+      ];
     in
     rec {
-      devShell.${system} = pkgs.mkShell {
-        nativeBuildInputs = shellPackages ++ [ 
+      devShell.${system} = pkgs.mkShell rec {
+        venvDir = "./.venv";
+        nativeBuildInputs = shellPackages ++ pythonPackages ++ [
           icesprog
           ecpdap
         ];
+
+        postVenvCreation = ''
+          ./litex_setup.py --dev --init --install
+          pip install bpython
+        '';
       };
 
     };

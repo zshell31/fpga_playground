@@ -1,6 +1,10 @@
 .direnv/
+.venv/
 *.bit
 *.json
 *_out.config
 *_tb.out
 *_tb.vcd
+
+litex/*
+!litex/.gitkeep
