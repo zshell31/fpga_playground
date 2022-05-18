@@ -11,7 +11,7 @@ initial begin
     $dumpvars(0, setbit_tb);
 
     #10 if (A != 1)
-        $display("--> ERROR! Pin A is not 1");
+        $display("ERROR! Pin A is not 1");
     else
         $display("Ok");
 
