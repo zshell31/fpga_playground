@@ -1,0 +1,8 @@
+verilog_defaults -push
+verilog_defaults -add -defer
+read_verilog /home/evgeny/projects/fpga/fpga_playground/litex/pythondata-cpu-vexriscv-smp/pythondata_cpu_vexriscv_smp/verilog/Ram_1w_1rs_Generic.v
+read_verilog /home/evgeny/projects/fpga/fpga_playground/litex/pythondata-cpu-vexriscv-smp/pythondata_cpu_vexriscv_smp/verilog/VexRiscvLitexSmpCluster_Cc1_Iw32Is4096Iy1_Dw32Ds4096Dy1_ITs4DTs4_Ood_Wm.v
+read_verilog /home/evgeny/projects/fpga/fpga_playground/litex/linux-on-litex-vexriscv/build/ulx3s/gateware/ulx3s.v
+verilog_defaults -pop
+attrmap -tocase keep -imap keep="true" keep=1 -imap keep="false" keep=0 -remove keep=0
+synth_ecp5   -json ulx3s.json -top ulx3s
