@@ -1,0 +1,21 @@
+[*]
+[*] GTKWave Analyzer v3.3.111 (w)1999-2020 BSI
+[*] Mon May 16 13:09:04 2022
+[*]
+[dumpfile] "/home/evgeny/projects/fpga/my_fpga_learn/setbit/setbit_tb.vcd"
+[dumpfile_mtime] "Mon May 16 13:06:23 2022"
+[dumpfile_size] 255
+[savefile] "/home/evgeny/projects/fpga/my_fpga_learn/setbit/setbit_tb.gtkw"
+[timestart] 0
+[size] 1000 600
+[pos] -1 -1
+*-2.932886 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] setbit_tb.
+[sst_width] 346
+[signals_width] 78
+[sst_expanded] 1
+[sst_vpaned_height] 157
+@28
+setbit_tb.A
+[pattern_trace] 1
+[pattern_trace] 0

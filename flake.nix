@@ -2,13 +2,24 @@
   description = "Flake for icesugar-pro fpga env development";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-21.11";
+    nixpkgs.url = "nixpkgs/nixos-22.05";
   };
 
   outputs = { self, nixpkgs }:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs { 
+        inherit system; 
+        config = {
+          packageOverrides = pkgs: rec {
+            sbt = pkgs.sbt.overrideAttrs (old: { # for building vexriscv-smp
+              postPatch = ''
+                echo -java-home ${pkgs.jre8.home} >>conf/sbtopts
+              '';
+            });
+          };
+        };
+      };
       icesprog = pkgs.stdenv.mkDerivation (with pkgs; {
         name = "icesprog";
 
@@ -59,24 +70,37 @@
         icestorm
         trellis
         gtkwave
+        ninja
+        picocom
+        parted
+        sbt
+        dtc
+        xdot
       ];
 
       pythonPackages = with pkgs.python3Packages; [
           python
           venvShellHook
       ];
+
+      riscvPkgs = with pkgs.pkgsCross.riscv64-embedded; [
+        buildPackages.gcc
+      ];
+
+      localTools = [
+        icesprog
+        ecpdap
+      ];
     in
     rec {
       devShell.${system} = pkgs.mkShell rec {
         venvDir = "./.venv";
-        nativeBuildInputs = shellPackages ++ pythonPackages ++ [
-          icesprog
-          ecpdap
-        ];
+        nativeBuildInputs = shellPackages ++ pythonPackages ++ riscvPkgs ++ localTools;
 
         postVenvCreation = ''
           ./litex_setup.py --dev --init --install
-          pip install bpython
+          cd litex && git clone --recursive git@github.com:litex-hub/linux-on-litex-vexriscv.git
+          pip install bpython meson
         '';
       };
 

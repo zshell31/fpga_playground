@@ -8,3 +8,4 @@
 
 litex/*
 !litex/.gitkeep
+!test_litex/*
